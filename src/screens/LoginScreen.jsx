@@ -54,9 +54,11 @@ export default function LoginScreen({ navigation }) {
 				setError('');
 				setIsRegistering(false); // Switch to Log In
 			} else {
+				// Log in the user
 				await login(email, password);
 
-				console.log('Navigating to Shore');
+				// Navigate to Shore screen
+				navigation.navigate('Main');
 			}
 		} catch (err) {
 			setError(err.message);
@@ -70,7 +72,9 @@ export default function LoginScreen({ navigation }) {
 			setIsLoading(true);
 			setError('');
 			await loginAnonymously();
-			console.log('Navigating to Shore');
+
+			// Navigate to Shore screen
+			navigation.navigate('Shore');
 		} catch (err) {
 			setError(err.message);
 		} finally {
