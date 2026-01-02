@@ -73,8 +73,8 @@ export default function LoginScreen({ navigation }) {
 			setError('');
 			await loginAnonymously();
 
-			// Navigate to Shore screen
-			navigation.navigate('Shore');
+			// Navigate to Main screen (which shows Ocean/ShoreScreen by default)
+			navigation.navigate('Main');
 		} catch (err) {
 			setError(err.message);
 		} finally {
