@@ -42,3 +42,8 @@ yarn-error.*
 
 
 functions/
+
+# Editor swap files
+*.swp
+*.swo
+*~
