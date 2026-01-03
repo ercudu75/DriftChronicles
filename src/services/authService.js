@@ -5,6 +5,7 @@ import {
 	signInWithEmailAndPassword,
 	signOut
 } from 'firebase/auth';
+import UserService from './UserService';
 
 /**
  * Sign in anonymously - Primary "Enter Void" action
@@ -14,6 +15,10 @@ import {
 export const loginAnonymously = async () => {
 	try {
 		const userCredential = await signInAnonymously(auth);
+
+		// Initialize user profile in Firestore
+		await UserService.initializeUser(userCredential.user);
+
 		return userCredential;
 	} catch (error) {
 		switch (error.code) {
@@ -37,6 +42,10 @@ export const loginAnonymously = async () => {
 export const register = async (email, password) => {
 	try {
 		const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+		// Initialize user profile in Firestore
+		await UserService.initializeUser(userCredential.user);
+
 		return userCredential;
 	} catch (error) {
 		switch (error.code) {
@@ -66,6 +75,10 @@ export const register = async (email, password) => {
 export const login = async (email, password) => {
 	try {
 		const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+		// Initialize user profile in Firestore (in case it doesn't exist)
+		await UserService.initializeUser(userCredential.user);
+
 		return userCredential;
 	} catch (error) {
 		switch (error.code) {
